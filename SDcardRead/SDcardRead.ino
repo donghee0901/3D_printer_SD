@@ -1,5 +1,7 @@
 #include <SPI.h>
 #include <SD.h>
+#include <stdio.h>
+#include <string.h>
 File myFile;
 char readData[2] = {'\0', '\0'};
 char readBuffer[100] = {0};
@@ -36,7 +38,7 @@ void loop() {
     while (myFile.available()) {
       readData[0] = myFile.read();
       if (readData[0] == '\n') {
-        myFile.close();
+//        myFile.close();
 
         start_idx = strchr(readBuffer, 'X');
         if (start_idx != NULL) {
@@ -51,6 +53,7 @@ void loop() {
             
             Serial.print("double x = ");
             Serial.println(data_queue[count][0]);
+            float_buffer[0] = '\0';
           }
         }
         start_idx = strchr(readBuffer, 'Y');
@@ -65,10 +68,11 @@ void loop() {
             Serial.println(float_buffer);
             Serial.print("double y = ");
             Serial.println(data_queue[count][1]);
+            float_buffer[0] = '\0';
           }
         }
-
-        
+        count++;
+        readBuffer[0] = '\0';
       }
       strcat(readBuffer, readData);
 

@@ -46,8 +46,7 @@ void loop() {
           end_idx = strchr(start_idx, ' ');
           if (end_idx != NULL) {
             strncpy(float_buffer, start_idx, end_idx - start_idx);
-            float_buffer[end_idx - start_idx] = '\0';
-            sscanf(float_buffer, "%lf", &data_queue[count][0]);
+            data_queue[count][0] = atof(float_buffer);
             Serial.print("string x = ");
             Serial.println(float_buffer);
             
@@ -63,7 +62,7 @@ void loop() {
           if (end_idx != NULL) {
             strncpy(float_buffer, start_idx, end_idx - start_idx);
             float_buffer[end_idx - start_idx] = '\0';
-            sscanf(float_buffer, "%lf", &data_queue[count][1]);
+            data_queue[count][1] = atof(float_buffer);
             Serial.print("string y = ");
             Serial.println(float_buffer);
             Serial.print("double y = ");
